@@ -4,6 +4,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:potofolio_web/expanded/social.dart';
 import 'package:potofolio_web/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,12 +21,33 @@ class _HomePageState extends State<HomePage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
+    int indexSelected = 0;
+
+    double boxHeight = 1;
+
+    List listExpandedWidget = [
+      Container(),
+      Social(heightBox: boxHeight, widthBox: width),
+      Text('PROJECTS'),
+      Text('EMAIL'),
+      Text('WEB'),
+    ];
+
     return Scaffold(
       backgroundColor: whiteColor,
-      // appBar: AppBar(title: Text('Draw Line')),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          // Content Expanded
+          AnimatedContainer(
+            duration: Duration(seconds: 1),
+            height: boxHeight,
+            width: width,
+            child: Center(
+              child: listExpandedWidget[indexSelected],
+            ),
+          ),
+          // Tappable Email Text (height: 1/3)
           CustomPaint(
             painter: LinePainter(),
             child: Container(
@@ -53,19 +75,11 @@ class _HomePageState extends State<HomePage> {
                     top: height / 3 / 5 - 20,
                     child: GestureDetector(
                       onTap: () {
-                        showModalBottomSheet(
-                          backgroundColor: whiteColor,
-                          barrierColor: blackColor.withOpacity(0.5),
-                          enableDrag: true,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                              height: height,
-                            );
-                          },
-                        );
+                        setState(() {
+                          boxHeight = height * 2 / 3;
+                          // NANTI GANTI INDEX BUAT URUTAN EMAIL BUTTON
+                          indexSelected = 3;
+                        });
                       },
                       child: Container(
                         height: 40,
