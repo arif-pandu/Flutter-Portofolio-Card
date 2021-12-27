@@ -43,12 +43,12 @@ class _SocialState extends State<Social> {
     return Container(
       height: widget.heightBox - 10,
       width: widget.widthBox,
+      // CARD BLUE
       child: Container(
         margin: EdgeInsets.fromLTRB(20, 35, 20, 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: blueLightColor.withOpacity(0.8),
-          // border: Border.all(width: 3, color: blueLightColor),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -113,50 +113,54 @@ class _SocialState extends State<Social> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 15),
-              height: widget.widthBox - 20,
-              width: widget.widthBox - 20,
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
-                itemCount: 4,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: whiteColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: blackColor.withOpacity(0.4),
-                          offset: Offset(3, 3),
-                          blurRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          listSocialButton[index]['icon'],
-                          size: 40,
-                        ),
-                        SizedBox(height: 15),
-                        SizedBox(
-                          width: 100,
-                          child: Text(
-                            listSocialButton[index]['text'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
+            AbsorbPointer(
+              absorbing: true,
+              child: Container(
+                margin: EdgeInsets.only(bottom: 15),
+                height: widget.widthBox - 20,
+                width: widget.widthBox - 20,
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2),
+                  itemCount: 4,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: whiteColor,
+                        boxShadow: [
+                          BoxShadow(
+                            color: blackColor.withOpacity(0.4),
+                            offset: Offset(3, 3),
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            listSocialButton[index]['icon'],
+                            size: 40,
+                          ),
+                          SizedBox(height: 15),
+                          SizedBox(
+                            width: 100,
+                            child: Text(
+                              listSocialButton[index]['text'],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
