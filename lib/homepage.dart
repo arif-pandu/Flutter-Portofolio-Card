@@ -4,6 +4,8 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:potofolio_web/expanded/gagal/projects-gagal.dart';
+import 'package:potofolio_web/expanded/gagal/social-gagal.dart';
 import 'package:potofolio_web/expanded/projects.dart';
 import 'package:potofolio_web/expanded/social.dart';
 import 'package:potofolio_web/theme.dart';
@@ -30,8 +32,8 @@ class _HomePageState extends State<HomePage> {
 
     List listExpandedWidget = [
       Container(),
-      Social(heightBox: boxHeight, widthBox: width),
-      Projets(heightBox: boxHeight, widthBox: width),
+      Social(height: height, width: width),
+      Projects(height: height, width: width),
       Text('EMAIL'),
       Text('WEB'),
     ];
@@ -42,11 +44,18 @@ class _HomePageState extends State<HomePage> {
         children: [
           // Content Expanded
           AnimatedContainer(
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             height: boxHeight,
             width: width,
             child: Center(
               child: listExpandedWidget[indexSelected],
+            ),
+            decoration: BoxDecoration(
+              color: whiteColor,
+              border: Border.all(
+                width: isTapped == false ? 0 : 2,
+                color: redColor,
+              ),
             ),
           ),
           // Tappable Email Text (height: 1/3)
