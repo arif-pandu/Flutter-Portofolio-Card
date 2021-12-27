@@ -16,14 +16,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  double boxHeight = 1;
+  int indexSelected = 0;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
-    int indexSelected = 0;
-
-    double boxHeight = 1;
 
     List listExpandedWidget = [
       Container(),
@@ -70,33 +68,84 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    left: width / 2 - 20,
-                    top: height / 3 / 5 - 20,
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          boxHeight = height * 2 / 3;
-                          // NANTI GANTI INDEX BUAT URUTAN EMAIL BUTTON
-                          indexSelected = 3;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          border: Border.all(width: 1, color: blackColor),
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ),
+                  // EMAIL
+                  tapButton(
+                    width / 2 - 20,
+                    height / 3 / 5 - 20,
+                    width,
+                    height,
+                    3,
+                  ),
+                  // SOCIAL
+                  tapButton(
+                    // 10,
+                    width / 10 -
+                        15 +
+                        (((width / 4 + 5) - (width / 10 - 15)) / 2) -
+                        20,
+                    // 10,
+                    height / 3 * 2 / 3 + 20,
+                    width,
+                    height,
+                    1,
+                  ),
+                  // PROJECT
+                  tapButton(
+                    (width / 4 + 10) +
+                        (((width / 2 + 12) - (width / 4 + 10)) / 2) -
+                        20,
+                    (height / 3) - (height / 3 / 3) + 20,
+                    width,
+                    height,
+                    2,
+                  ),
+                  // WEBSITE
+                  tapButton(
+                    (width * 0.9 - 30) +
+                        (((width * 0.9 + 15) - (width * 0.9 - 30)) / 2) -
+                        20,
+                    (height / 3) - (height / 3 / 3) + 20,
+                    width,
+                    height,
+                    4,
                   ),
                 ],
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Positioned tapButton(
+    double left,
+    double top,
+    double width,
+    double height,
+    int index,
+  ) {
+    return Positioned(
+      left: left,
+      top: top,
+      child: GestureDetector(
+        onTap: () {
+          print('TAP');
+          setState(() {
+            boxHeight = height * 2 / 3;
+            // NANTI GANTI INDEX BUAT URUTAN EMAIL BUTTON
+            indexSelected = index;
+          });
+        },
+        child: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            color: whiteColor,
+            border: Border.all(width: 1, color: blackColor),
+            shape: BoxShape.circle,
+          ),
+        ),
       ),
     );
   }
