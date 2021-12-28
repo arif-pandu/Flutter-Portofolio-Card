@@ -69,9 +69,6 @@ class _HomePageState extends State<HomePage> {
                 child: Container(
                   height: height / 3,
                   width: width,
-                  decoration: BoxDecoration(
-                      // border: Border.all(width: 2, color: blackColor),
-                      ),
                   child: Stack(
                     children: [
                       Center(
