@@ -20,20 +20,134 @@ class Projects extends StatefulWidget {
 
 class _ProjectsState extends State<Projects> {
   //
+  Widget theChild = Container();
+  //
   List<dynamic> listProjects = [
     {
       'name': 'DaVinci Cryptex',
       'icon': Icons.scatter_plot_outlined,
+      'image': 'assets/image/davinci-cryptex.png',
+      'descrption':
+          'this is a simple game built with Flutter. The player must math all of the letter based on the question',
     },
     {
-      'name': 'DaVinci Cryptex',
-      'icon': Icons.scatter_plot_outlined,
-    }
+      'name': 'IQ Games',
+      'icon': Icons.code,
+      'image': 'assets/image/iq-games.jpg',
+      'descrption':
+          'this is a simple game built with Flutter. The player must math all of the letter based on the question',
+    },
+    {
+      'name': 'Scan To Attend',
+      'icon': Icons.code,
+      'image': 'assets/image/scan-to-attend.jpg',
+      'descrption':
+          'this is a simple game built with Flutter. The player must math all of the letter based on the question',
+    },
+    {
+      'name': 'Travel App',
+      'icon': Icons.code,
+      'image': 'assets/image/travel-app.png',
+      'descrption':
+          'this is a simple game built with Flutter. The player must math all of the letter based on the question',
+    },
+    {
+      'name': 'Spotify Clone',
+      'icon': Icons.code,
+      'image': 'assets/image/spotify-clone.png',
+      'descrption':
+          'this is a simple game built with Flutter. The player must math all of the letter based on the question',
+    },
   ];
 
   //
   @override
   Widget build(BuildContext context) {
+    List listWidgetExpand = List.generate(
+      listProjects.length,
+      (index) => Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: EdgeInsets.fromLTRB(10, 20, 10, 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: blackColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  listProjects[index]['name'],
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(),
+                child: Center(
+                  child: Container(
+                    height: widget.width * 0.6,
+                    width: widget.width * 0.6,
+                    child: Center(
+                      child: Text(
+                        listProjects[index]['descrption'],
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: blackColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                child: Row(
+                  children: List.generate(
+                    // listProjects[index]['image'].length,
+                    1,
+                    (index) => Container(
+                      height: 80,
+                      width: 80,
+                      decoration: BoxDecoration(
+                        color: blueColor,
+                        image: DecorationImage(
+                          image: AssetImage(
+                            listProjects[index]['image'],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // child: Container(
+              //   width: double.infinity,
+              //   decoration: BoxDecoration(
+              //     color: blueColor,
+              //     image: DecorationImage(
+              //       image: AssetImage(
+              //         listProjects[index]['image'],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            ),
+          ],
+        ),
+      ),
+    );
+
     //
     return Container(
       height: widget.height,
@@ -50,23 +164,29 @@ class _ProjectsState extends State<Projects> {
             // DRAG TARGET EXPLAINED DETAIL
             Expanded(
               flex: 10,
-              child: Container(
-                margin: EdgeInsets.only(bottom: 20),
-                decoration: BoxDecoration(
-                  // color: whiteColor,
-                  color: blackColor,
-                  borderRadius: BorderRadius.circular(15),
-                ),
+              child: DragTarget<Widget>(
+                onWillAccept: (data) => true,
+                onAccept: (data) {
+                  theChild = data;
+                },
+                builder: (context, accepted, rejected) {
+                  return Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: theChild,
+                  );
+                },
               ),
             ),
+            // DAGGABLE THUMBNAIL
             Expanded(
               flex: 2,
               child: Center(
                 child: Container(
-                  decoration: BoxDecoration(
-                      // color: whiteColor,
-                      // borderRadius: BorderRadius.circular(15),
-                      ),
+                  decoration: BoxDecoration(),
                   child: SizedBox(
                     height: 100,
                     width: double.infinity,
@@ -74,12 +194,13 @@ class _ProjectsState extends State<Projects> {
                       itemCount: listProjects.length,
                       options: CarouselOptions(
                         viewportFraction: 0.45,
-                        autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 4),
-                        autoPlayAnimationDuration: Duration(seconds: 3),
+                        // autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayAnimationDuration: Duration(seconds: 1),
                       ),
                       itemBuilder: (context, index, indexToo) {
                         return Draggable(
+                          data: listWidgetExpand[index],
                           child: Container(
                             width: 100,
                             height: 100,
@@ -88,9 +209,7 @@ class _ProjectsState extends State<Projects> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
-                              child: Text(
-                                index.toString(),
-                              ),
+                              child: Icon(listProjects[index]['icon']),
                             ),
                           ),
                           feedback: Container(
@@ -116,7 +235,6 @@ class _ProjectsState extends State<Projects> {
                 ),
               ),
             ),
-            // DRAGGABLE PROJECT THUMBNAIL
           ],
         ),
       ),
