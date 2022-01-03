@@ -99,7 +99,7 @@ class _HomePageDesktopState extends State<HomePageDesktop> {
           scrollController.animateTo(
             0,
             duration: Duration(seconds: 1),
-            curve: Curves.linear,
+            curve: Curves.easeIn,
           );
         });
       },
