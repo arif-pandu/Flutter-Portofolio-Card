@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:potofolio_web/homepage_desktop.dart';
 
 import 'homepage.dart';
 
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: "Helvetica"),
-      home: kIsWeb ? HomePageDesktop() : HomePage(),
+      home: HomePage(),
     );
   }
 }
